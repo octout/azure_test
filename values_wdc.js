@@ -58,14 +58,10 @@
     };
 
     myConnector.getData = function(table, doneCallback) {
-        var args = JSON.parse(tableau.connectionData);
-        str_apikey = args.apikey;
         $.getJSON("Obs.json", function(json) { //ローカルのjsonへアクセス
             console.log(json); // this will show the info it in firebug console
             console.log(json.length); // this will show the info it in firebug console
-            console.log(json[0].Obs_id);
             for (var i = 0, len = json.length; i < len; i++) {
-                console.log(json[i].Obs_id)
                 dateString = "query=" + json[i].lat + "," + json[i].lon,
                 apiCall = "https://atlas.microsoft.com/weather/forecast/hourly/json?subscription-key=" + apiString +"&api-version=1.0&" + dateString + "&duration=72&language=ja";
                 (function(t){
@@ -92,9 +88,9 @@
                             });
                         }
                     table.appendRows(tableData);
+                    doneCallback();
                     });
                 })(i)
-            doneCallback();
             } 
      
         });
