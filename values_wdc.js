@@ -61,6 +61,7 @@
         $.getJSON("Obs.json", function(json) { //ローカルのjsonへアクセス
             console.log(json); // this will show the info it in firebug console
             console.log(json.length); // this will show the info it in firebug console
+            var count = json.length;
             for (var i = 0, len = json.length; i < len; i++) {
                 dateString = "query=" + json[i].lat + "," + json[i].lon,
                 apiCall = "https://atlas.microsoft.com/weather/forecast/hourly/json?subscription-key=" + apiString +"&api-version=1.0&" + dateString + "&duration=72&language=ja";
@@ -87,13 +88,22 @@
                                 "windgustspeed":forecast[i].windGust.speed.value
                             });
                         }
-                    table.appendRows(tableData);
-                    doneCallback();
                     });
                 })(i)
+            next()
             } 
+            function next(){
+                count--
+                if(count < 1){
+                    table.appendRows(tableData);
+                    doneCallback();
+                };
+            }; 
      
         });
+
+        // Wait until all patches have been loaded before appending data.
+
     };
 
     tableau.registerConnector(myConnector);
