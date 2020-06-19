@@ -87,11 +87,11 @@
                               "windspeed":forecast[i].wind.speed.value,
                               "windgustspeed":forecast[i].windGust.speed.value
                           });
-                      table.appendRows(tableData);
+                          table.appendRows(tableData);
+                          doneCallback();
                       }
                   });
               })(i)
-          doneCallback();
           } 
    
       });
