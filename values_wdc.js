@@ -1,17 +1,16 @@
 (function () {
     var myConnector = tableau.makeConnector();
-    var apiString = $('#apikey').val();
     myConnector.getSchema = function (schemaCallback) {
         var cols = [{
             id: "Obs_id",
-            alias: "Obs_id",
+            alias: "Obsid",
             dataType: tableau.dataTypeEnum.string
         }, {
             id: "Obs_name",
             dataType: tableau.dataTypeEnum.string
         }, {
             id: "date",
-            dataType: tableau.dataTypeEnum.datetime
+            dataType: tableau.dataTypeEnum.string
         }, {
             id: "weather",
             alias: "weather",
@@ -49,8 +48,8 @@
             dataType: tableau.dataTypeEnum.float
         }];
         var tableSchema = {
-            id: "earthquakeFeed",
-            alias: "Earthquakes with magnitude greater than 4.5 in the last seven days",
+            id: "azuremapsAPI",
+            alias: "dailyweaterhforercasts",
             columns: cols
         };
     
@@ -58,12 +57,12 @@
     };
 
     myConnector.getData = function(table, doneCallback) {
+        var args = JSON.parse(tableau.connectionData);
+        str_apikey = args.apikey;
         $.getJSON("Obs.json", function(json) { //ローカルのjsonへアクセス
-            console.log(json); // this will show the info it in firebug console
-            console.log(json.length); // this will show the info it in firebug console
             for (var i = 0, len = json.length; i < len; i++) {
-                geoString = "query=" + json[i].lat + "," + json[i].lon,
-                apiCall = "https://atlas.microsoft.com/weather/forecast/hourly/json?subscription-key=" + apiString +"&api-version=1.0&" + geoString + "&duration=72&language=ja";
+                dateString = "query=" + json[i].lat + "," + json[i].lon,
+                apiCall = "https://atlas.microsoft.com/weather/forecast/hourly/json?subscription-key=" + str_apikey +"&api-version=1.0&" + dateString + "&duration=72&language=ja";
                 (function(t){
                     $.getJSON(apiCall, function(resp) {                  
                         var forecast = resp.forecasts,
@@ -73,9 +72,9 @@
                             tableData.push({
                                 "Obs_id":json[t].Obs_id,
                                 "Obs_name":json[t].Obs_name,
-                                "date": forecast[j].date,
-                                "weather": forecast[j].iconPhrase,
-                                "temp": forecast[j].temperature.value,
+                                "date":forecast[j].date,
+                                "weather":forecast[j].iconPhrase,
+                                "temp":forecast[j].temperature.value,
                                 "humidity": forecast[j].relativeHumidity,
                                 "rainProbability":forecast[i].precipitationProbability,
                                 "rainvalue":forecast[i].rain.value,
@@ -85,11 +84,10 @@
                                 "winddirection":forecast[i].wind.direction.localizedDescription,
                                 "windspeed":forecast[i].wind.speed.value,
                                 "windgustspeed":forecast[i].windGust.speed.value
-                                
                             });
-                        table.appendRows(tableData);
-                        doneCallback();
                         }
+                    table.appendRows(tableData);
+                    doneCallback();
                     });
                 })(i)
             } 
@@ -98,14 +96,12 @@
     };
 
     tableau.registerConnector(myConnector);
-})();
-
-$(document).ready(function () {
-    $("#submitButton").click(function () {
-        var apikey = document.getElementById('apikey').value;
-        tableau.connectionData = JSON.stringify({apikey: apikey });
-        tableau.connectionName = "Azure Maps Weather Service";
-        tableau.submit();
+    $(document).ready(function () {
+        $("#submitButton").click(function () {
+            var apikey = document.getElementById('apikey').value;
+            tableau.connectionData = JSON.stringify({apikey: apikey });
+            tableau.connectionName = "AzureMapsWeatherService";
+            tableau.submit();
+        });
     });
-
-});
+})();
