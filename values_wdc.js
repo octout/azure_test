@@ -1,3 +1,4 @@
+var tableData = [];
 (function () {
     var myConnector = tableau.makeConnector();
     var apiString = $('#apikey').val();
@@ -62,7 +63,6 @@
             console.log(json); // this will show the info it in firebug console
             console.log(json.length); // this will show the info it in firebug console
             var count = json.length;
-                tableData = [];
             for (var i = 0, len = json.length; i < len; i++) {
                 geoString = "query=" + json[i].lat + "," + json[i].lon,
                 apiCall = "https://atlas.microsoft.com/weather/forecast/hourly/json?subscription-key=" + apiString +"&api-version=1.0&" + geoString + "&duration=72&language=ja";
