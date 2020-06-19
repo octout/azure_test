@@ -1,4 +1,3 @@
-var tableData = [];
 (function () {
     var myConnector = tableau.makeConnector();
     var apiString = $('#apikey').val();
@@ -59,6 +58,7 @@ var tableData = [];
     };
 
     myConnector.getData = function(table, doneCallback) {
+        var tableData = [];
         $.getJSON("Obs.json", function(json) { //ローカルのjsonへアクセス
             console.log(json); // this will show the info it in firebug console
             console.log(json.length); // this will show the info it in firebug console
