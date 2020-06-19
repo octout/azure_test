@@ -61,9 +61,6 @@
       var args = JSON.parse(tableau.connectionData);
       str_apikey = args.apikey;
       $.getJSON("Obs.json", function(json) { //ローカルのjsonへアクセス
-          console.log(json); // this will show the info it in firebug console
-          console.log(json.length); // this will show the info it in firebug console
-          console.log(json[0].Obs_id);
           for (var i = 0, len = json.length; i < len; i++) {
               console.log(json[i].Obs_id)
               dateString = "query=" + json[i].lat + "," + json[i].lon,
@@ -90,8 +87,8 @@
                               "windspeed":forecast[i].wind.speed.value,
                               "windgustspeed":forecast[i].windGust.speed.value
                           });
+                      table.appendRows(tableData);
                       }
-                  table.appendRows(tableData);
                   });
               })(i)
           doneCallback();
