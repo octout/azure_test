@@ -67,7 +67,7 @@
             for (var i = 0, len = json.length; i < len; i++) {
                 console.log(json[i].Obs_id)
                 dateString = "query=" + json[i].lat + "," + json[i].lon,
-                apiCall = "https://atlas.microsoft.com/weather/forecast/hourly/json?subscription-key=" + str_apikey +"&api-version=1.0&" + dateString + "&duration=72&language=ja";
+                apiCall = "https://atlas.microsoft.com/weather/forecast/hourly/json?subscription-key=" + apiString +"&api-version=1.0&" + dateString + "&duration=72&language=ja";
                 (function(t){
                     $.getJSON(apiCall, function(resp) {                  
                         var forecast = resp.forecasts,
