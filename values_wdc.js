@@ -61,9 +61,7 @@
         $.getJSON("Obs.json", function(json) { //ローカルのjsonへアクセス
             console.log(json); // this will show the info it in firebug console
             console.log(json.length); // this will show the info it in firebug console
-            console.log(json[0].Obs_id);
             for (var i = 0, len = json.length; i < len; i++) {
-                console.log(json[i].Obs_id)
                 geoString = "query=" + json[i].lat + "," + json[i].lon,
                 apiCall = "https://atlas.microsoft.com/weather/forecast/hourly/json?subscription-key=" + apiString +"&api-version=1.0&" + geoString + "&duration=72&language=ja";
                 (function(t){
