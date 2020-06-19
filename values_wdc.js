@@ -57,8 +57,6 @@
     };
 
     myConnector.getData = function(table, doneCallback) {
-        var args = JSON.parse(tableau.connectionData);
-        str_apikey = args.apikey;
         $.getJSON("Obs.json", function(json) { //ローカルのjsonへアクセス
             for (var i = 0, len = json.length; i < len; i++) {
                 dateString = "query=" + json[i].lat + "," + json[i].lon,
