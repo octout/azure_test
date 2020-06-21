@@ -135,6 +135,6 @@ function readJSON(){
 //日付型の変更
 function dateToTableauDate(dateToConvert) {
     // Use moment to convert dates to acceptible format for Tableau
-    var tableauDate = moment.unix(dateToConvert).format("YYYY-MM-DD HH:mm:ss.SSS");   // Forecast.io timestaps are unix
+    var tableauDate = moment.unix(dateToConvert).format("YYYY-MM-DD HH:mm:ss");   // Forecast.io timestaps are unix
     return tableauDate;
   }
