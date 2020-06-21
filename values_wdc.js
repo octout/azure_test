@@ -122,7 +122,7 @@ $(document).ready(function () {
 // JSONファイルの読み込み。
 function readJSON(){
  
-    var f = "Obj.json";
+    var f = "Obs.json";
     var retJson;
    
     var obj = new XMLHttpRequest();
