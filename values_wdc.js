@@ -47,7 +47,7 @@
             id: "windgustspeed",
             dataType: tableau.dataTypeEnum.float
         }];
-        
+
         var tableSchema = {
             id: "azuremapsAPI",
             alias: "dailyweaterhforercasts",
@@ -77,14 +77,14 @@
                                 "weather":forecast[j].iconPhrase,
                                 "temp":forecast[j].temperature.value,
                                 "humidity": forecast[j].relativeHumidity,
-                                "rainProbability":forecast[i].precipitationProbability,
-                                "rainvalue":forecast[i].rain.value,
-                                "snowProbability":forecast[i].snowProbability,
-                                "snowvalue":forecast[i].snow.value,
-                                "cloudCover":forecast[i].cloudCover,
-                                "winddirection":forecast[i].wind.direction.localizedDescription,
-                                "windspeed":forecast[i].wind.speed.value,
-                                "windgustspeed":forecast[i].windGust.speed.value
+                                "rainProbability":forecast[j].precipitationProbability,
+                                "rainvalue":forecast[j].rain.value,
+                                "snowProbability":forecast[j].snowProbability,
+                                "snowvalue":forecast[j].snow.value,
+                                "cloudCover":forecast[j].cloudCover,
+                                "winddirection":forecast[j].wind.direction.localizedDescription,
+                                "windspeed":forecast[j].wind.speed.value,
+                                "windgustspeed":forecast[j].windGust.speed.value
                             });
                         }
                     table.appendRows(tableData);
