@@ -65,7 +65,6 @@
         var count = obsjson.length * 72;
             for (var i = 0, len = obsjson.length; i < len; i++) {
                 console.log("SuccessRead-json"+ " count:" + count);
-                //var count = json.length;
                 var dateString = "query=" + obsjson[i].lat + "," + obsjson[i].lon,
                     apiCall = "https://atlas.microsoft.com/weather/forecast/hourly/json?subscription-key=" + str_apikey +"&api-version=1.0&" + dateString + "&duration=72&language=ja";
                 (function(t){
@@ -122,10 +121,10 @@ function readJSON(){
     var f = "Obs.json";
     var retJson;
     var obj = new XMLHttpRequest();
-    obj.open( 'get', f, false ); //ファイルオープン : 同期モード
+    obj.open( 'get', f, false ); //ファイルオープン
     obj.onload = function() {
       try {
-        retJson = JSON.parse(this.responseText); //JSON型でパース。
+        retJson = JSON.parse(this.responseText);
       } catch (e) {
         alert("コマンド定義ファイルの読み込み、解析に失敗しました。");
       }
