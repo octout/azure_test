@@ -132,7 +132,6 @@ function readJSON(){
     obj.send(null); //ここで読込実行。
     return retJson;
 }
-
 //日付型の変更
 function dateToTableauDate(dateToConvert) {
     // Use moment to convert dates to acceptible format for Tableau
