@@ -10,7 +10,7 @@
             dataType: tableau.dataTypeEnum.string
         }, {
             id: "date",
-            dataType: tableau.dataTypeEnum.string
+            dataType: tableau.dataTypeEnum.datetime
         }, {
             id: "weather",
             alias: "weather",
@@ -76,7 +76,7 @@
                             tableData.push({
                                 "Obs_id":obsjson[t].Obs_id,
                                 "Obs_name":obsjson[t].Obs_name,
-                                "date":dateToTableauDate(forecast[j].date),
+                                "date":forecast[j].date,
                                 "weather":forecast[j].iconPhrase,
                                 "temp":forecast[j].temperature.value,
                                 "humidity": forecast[j].relativeHumidity,
