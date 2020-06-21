@@ -61,6 +61,7 @@
         var args = JSON.parse(tableau.connectionData),
             str_apikey = args.apikey,
             tableData = [];
+        var count = patches.length;
         $.getJSON("Obs.json", function(json) { //ローカルのjsonへアクセス
             for (var i = 0, len = json.length; i < len; i++) {
                 var dateString = "query=" + json[i].lat + "," + json[i].lon,
@@ -89,21 +90,26 @@
                         }
                     });
                 })(i);
+                next();
             }
-        table.appendRows(tableData);
-        doneCallback();
+            function next(){
+                count--
+                if(count < 1){
+                    table.appendRows(tableData);
+                    doneCallback();
+                };
+            };
         });
     };
-
     tableau.registerConnector(myConnector);
-
-    $(document).ready(function () {
-        $("#submitButton").click(function () {
-            var apikey = document.getElementById('apikey').value;
-            tableau.connectionData = JSON.stringify({apikey: apikey });
-            tableau.connectionName = "AzureMapsWeatherService";
-            tableau.submit();
-        });
-    });
-
 })();
+
+
+$(document).ready(function () {
+    $("#submitButton").click(function () {
+        var apikey = document.getElementById('apikey').value;
+        tableau.connectionData = JSON.stringify({apikey: apikey });
+        tableau.connectionName = "AzureMapsWeatherService";
+        tableau.submit();
+    });
+});
