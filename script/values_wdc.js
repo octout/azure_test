@@ -118,7 +118,7 @@ $(document).ready(function () {
 
 // JSONファイルの読み込み。
 function readJSON(){
-    var f = "../script/Obs.json";
+    var f = "script/Obs.json";
     var retJson;
     var obj = new XMLHttpRequest();
     obj.open( 'get', f, false ); //ファイルオープン
