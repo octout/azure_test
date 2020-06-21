@@ -76,7 +76,7 @@
                             tableData.push({
                                 "Obs_id":obsjson[t].Obs_id,
                                 "Obs_name":obsjson[t].Obs_name,
-                                "date":Date(forecast[j].date),
+                                "date":dateToTableauDate(forecast[j].date),
                                 "weather":forecast[j].iconPhrase,
                                 "temp":forecast[j].temperature.value,
                                 "humidity": forecast[j].relativeHumidity,
@@ -132,3 +132,11 @@ function readJSON(){
     obj.send(null); //ここで読込実行。
     return retJson;
 }
+
+//日付型の変更
+function dateToTableauDate(dateToConvert) {
+    // Use moment to convert dates to acceptible format for Tableau
+    var tableauDate = moment.unix(dateToConvert).format("YYYY-MM-DD HH:mm:ss.SSS");   // Forecast.io timestaps are unix
+    
+    return tableauDate;
+  }
