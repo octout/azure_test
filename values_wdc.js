@@ -93,6 +93,7 @@
                 next();
             }
             function next(){
+                console.log(count);
                 count--
                 if(count < 1){
                     table.appendRows(tableData);
