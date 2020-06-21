@@ -10,7 +10,7 @@
             dataType: tableau.dataTypeEnum.string
         }, {
             id: "date",
-            dataType: tableau.dataTypeEnum.datetime
+            dataType: tableau.dataTypeEnum.string
         }, {
             id: "weather",
             alias: "weather",
