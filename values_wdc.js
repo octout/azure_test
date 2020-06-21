@@ -47,6 +47,7 @@
             id: "windgustspeed",
             dataType: tableau.dataTypeEnum.float
         }];
+        
         var tableSchema = {
             id: "azuremapsAPI",
             alias: "dailyweaterhforercasts",
@@ -57,16 +58,16 @@
     };
 
     myConnector.getData = function(table, doneCallback) {
-        var args = JSON.parse(tableau.connectionData);
-        str_apikey = args.apikey;
+        var args = JSON.parse(tableau.connectionData),
+            str_apikey = args.apikey,
+            tableData = [];
         $.getJSON("Obs.json", function(json) { //ローカルのjsonへアクセス
             for (var i = 0, len = json.length; i < len; i++) {
-                dateString = "query=" + json[i].lat + "," + json[i].lon,
-                apiCall = "https://atlas.microsoft.com/weather/forecast/hourly/json?subscription-key=" + str_apikey +"&api-version=1.0&" + dateString + "&duration=72&language=ja";
+                var dateString = "query=" + json[i].lat + "," + json[i].lon,
+                    apiCall = "https://atlas.microsoft.com/weather/forecast/hourly/json?subscription-key=" + str_apikey +"&api-version=1.0&" + dateString + "&duration=72&language=ja";
                 (function(t){
                     $.getJSON(apiCall, function(resp) {                  
-                        var forecast = resp.forecasts,
-                            tableData = [];
+                        var forecast = resp.forecasts;
                         // Iterate over the JSON object
                         for(var j = 0, len = forecast.length; j < len; j++) {
                             tableData.push({
