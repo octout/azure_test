@@ -121,12 +121,9 @@ $(document).ready(function () {
 
 // JSONファイルの読み込み。
 function readJSON(){
- 
     var f = "Obs.json";
     var retJson;
-   
     var obj = new XMLHttpRequest();
-   
     obj.open( 'get', f, false ); //ファイルオープン : 同期モード
     obj.onload = function() {
       try {
