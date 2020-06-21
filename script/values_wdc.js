@@ -115,7 +115,7 @@ $(document).ready(function () {
         tableau.submit();
     });
 });
-a
+
 // JSONファイルの読み込み。
 function readJSON(){
     var f = "script/Obs.json";
