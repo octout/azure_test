@@ -61,7 +61,8 @@
         var args = JSON.parse(tableau.connectionData),
             str_apikey = args.apikey,
             tableData = [];
-        var count = retJson.length * 72;
+        var retjson = readJSON();
+        var count = retjson.length * 72;
         $.getJSON("Obs.json", function(json) { //ローカルのjsonへアクセス
             for (var i = 0, len = json.length; i < len; i++) {
                 console.log("SuccessRead-json"+ " count:" + count);
