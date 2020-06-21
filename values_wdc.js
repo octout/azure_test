@@ -61,7 +61,7 @@
         var args = JSON.parse(tableau.connectionData),
             str_apikey = args.apikey,
             tableData = [];
-        var count = 360;
+        var count = retJson.length * 72;
         $.getJSON("Obs.json", function(json) { //ローカルのjsonへアクセス
             for (var i = 0, len = json.length; i < len; i++) {
                 console.log("SuccessRead-json"+ " count:" + count);
@@ -117,3 +117,23 @@ $(document).ready(function () {
         tableau.submit();
     });
 });
+
+// JSONファイルの読み込み。
+function readJSON(){
+ 
+    var f = "Obj.json";
+    var retJson;
+   
+    var obj = new XMLHttpRequest();
+   
+    obj.open( 'get', f, false ); //ファイルオープン : 同期モード
+    obj.onload = function() {
+      try {
+        retJson = JSON.parse(this.responseText); //JSON型でパース。
+      } catch (e) {
+        alert("コマンド定義ファイルの読み込み、解析に失敗しました。");
+      }
+    }
+    obj.send(null); //ここで読込実行。
+    return retJson;
+  }
